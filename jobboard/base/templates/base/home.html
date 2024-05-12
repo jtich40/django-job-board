@@ -2,6 +2,9 @@
 
 {% block content %}
 <h1>Welcome to JobQuest! Find your next job here!</h1>
+{% if request.user.is_authenticated %}
+<h2>Hi {{request.user.first_name}}!</h2>
+{% endif %}
 <div>
     <div>
         {% for job in jobs  %}

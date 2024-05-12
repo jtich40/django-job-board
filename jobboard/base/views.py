@@ -1,8 +1,60 @@
 from django.shortcuts import render, redirect
 from .models import Job
-from .forms import JobForm
+from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from .forms import JobForm, RegisterForm, LoginForm
 
 # Create your views here.
+
+# don't use login as function name because it's a built-in function we are using
+def loginPage(request):
+    page = 'login'
+    
+    if request.user.is_authenticated:
+        return redirect('home')
+    
+    if request.method == 'POST':
+        # make sure the email is lowercase
+        username = request.POST.get('username').lower()
+        password = request.POST.get('password')
+        
+        try:
+            user = User.objects.get(username=username)
+        except:
+            messages.error(request, "User does not exist.")
+        # this will authenticate the user by checking email and password
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request, "username or password is incorrect.")
+    
+    return render(request, 'base/login_register.html', {'page': page})
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+
+def registerPage(request):
+    page = 'register'
+    form = RegisterForm()
+    
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            # we need to save the user first before we can authenticate them
+            user = form.save(commit=False)
+            # clean the data so that the email is lowercase
+            user.email = user.email.lower()
+            user.save()
+            # login the user after they have registered
+            login(request, user)
+            return redirect('home')
+    
+    return render(request, 'base/login_register.html', {'form': form})
 
 def home(request):
     jobs = Job.objects.all()

@@ -1,0 +1,91 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+
+<div class="flex justify-center">
+    <a href="{% url "login" %}" class="btn btn-primary mr-6">Login</a>
+    <a href="{% url "register" %}" class="btn btn-primary">Register</a>
+</div>
+
+{% if page == 'login' %}
+<div class="flex justify-center mt-8">
+<div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+    <form class="card-body" action="" method="POST">
+        {% csrf_token %}
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Username</span>
+        </label>
+        <input type="text" name="username" placeholder="Username" class="input input-bordered" required />
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Password</span>
+        </label>
+        <input type="password" name="password" placeholder="Password" class="input input-bordered" required />
+        {% comment %} <label class="label">
+          <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+        </label> {% endcomment %}
+      </div>
+      <div class="form-control mt-6">
+        <button class="btn btn-primary">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% else %}
+
+<div class="flex justify-center mt-8">
+    <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+        <form class="card-body" action="" method="POST">
+            {% csrf_token %}
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">First Name</span>
+            </label>
+            <input type="text" name="first_name" placeholder="First Name" class="input input-bordered" required />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Last Name</span>
+            </label>
+            <input type="text" name="last_name" placeholder="Last Name" class="input input-bordered" required />
+            {% comment %} <label class="label">
+              <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+            </label> {% endcomment %}
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Username</span>
+            </label>
+            <input type="text" name="username" placeholder="Username" class="input input-bordered" required />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Email</span>
+            </label>
+            <input type="email" name="email" placeholder="Email" class="input input-bordered" required />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Password</span>
+            </label>
+            <input type="password" name="password1" placeholder="Password" class="input input-bordered" required />
+          </div>
+          <div class="form-control">
+            <label class="label">
+              <span class="label-text">Confirm Password</span>
+            </label>
+            <input type="password" name="password2" placeholder="Confirm Password" class="input input-bordered" required />
+          </div>
+          <div class="form-control mt-6">
+            <button class="btn btn-primary" type="submit">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+{% endif %}
+    
+{% endblock content %}
