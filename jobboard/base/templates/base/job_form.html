@@ -1,7 +1,11 @@
 {% extends "base/main.html" %}
 
 {% block content %}
-<h1 class="text-3xl font-bold text-center">Create a Job Listing</h1>
+{% if form.instance.pk %}
+<h1 class="text-3xl font-bold text-center">Update Job Listing</h1>
+{% else %}
+<h1 class="text-3xl font-bold text-center">Create Job Listing</h1>
+{% endif %}
 <div class="flex justify-center mt-8">
 <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
 <form class="card-body" action="" method="POST" >

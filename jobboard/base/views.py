@@ -26,3 +26,27 @@ def createJob(request):
             return redirect('home')
         
     return render(request, 'base/job_form.html', {'form': form})
+
+def updateJob(request, pk):
+    job = Job.objects.get(id=pk)
+    # this will prefill the form with the job data
+    form = JobForm(instance=job)
+    
+    if request.method == 'POST':
+        # this will update the job with the new data
+        form = JobForm(request.POST, instance=job)
+        if form.is_valid():
+            form.save()
+            # pass the job id to the job view so user can see the updated job
+            return redirect('job', pk=job.id)
+        
+    return render(request, 'base/job_form.html', {'form': form})
+
+def deleteJob(request, pk):
+    job = Job.objects.get(id=pk)
+    
+    if request.method == "POST":
+        job.delete()
+        return redirect('home')
+    
+    return render(request, 'base/delete_job.html', {'job': job})
