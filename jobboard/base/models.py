@@ -9,7 +9,7 @@ class Job(models.Model):
     company = models.CharField(max_length=200, null=True)
     description = models.TextField(null=True)
     location = models.CharField(max_length=200, null=True)
-    deadline = models.DateTimeField(editable=True, null=True)
+    deadline = models.DateField(editable=True, null=True)
     
     def __str__(self):
         return self.title

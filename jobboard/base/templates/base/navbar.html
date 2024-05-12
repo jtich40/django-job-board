@@ -1,10 +1,10 @@
 <div class="navbar bg-base-100">
     <div class="flex-1">
-      <a class="btn btn-ghost text-xl">JobQuest</a>
+      <a href="{% url "home" %}" class="btn btn-ghost text-xl">JobQuest</a>
     </div>
     <div class="flex-none">
       <ul class="menu menu-horizontal px-1">
-        <li><a>Create Listing</a></li>
+        <li><a href="{% url "create-job" %}" >Create Listing</a></li>
         {% comment %} <li>
           <details>
             <summary>
