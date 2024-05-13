@@ -43,8 +43,9 @@
             </label>
             <input type="file" name="cover_letter" required />
           </div>
-          <div class="form-control mt-6">
-            <button class="btn btn-primary" type="submit">Submit Application</button>
+          <div class="flex justify-center mt-6">
+            <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Cancel</a>
+            <button class="btn btn-primary ml-6" type="submit">Submit</button>
           </div>
         </form>
       </div>

@@ -73,7 +73,10 @@ def createJob(request):
         # take the data from the form and create a new job
         form = JobForm(request.POST)
         if form.is_valid():
-            form.save()
+            job =form.save(commit=False)
+            # set the creator of the job to the current user
+            job.creator = request.user 
+            job.save()
             # access url by name in urls.py
             return redirect('home')
         

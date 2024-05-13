@@ -2,14 +2,16 @@
 
 {% block content %}
 
-<div class="flex justify-center items-center">
+<div class="flex justify-center">
     <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
     <form class="card-body" action="" method="POST" >
         {% comment %} prevents cross site forgery submissions, malicious activity {% endcomment %}
         {% csrf_token %}
        <h1>Are you sure you want to delete this job listing?</h1>
-        <div class="form-control mt-6">
-          <button class="btn btn-primary" type="submit">Submit</button>
+        <div class="flex justify-center mt-6">
+            {% comment %} this will send the user back to the previous page {% endcomment %}
+            <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Cancel</a>
+          <button class="btn btn-primary ml-6" type="submit">Submit</button>
         </div>
       </form>
     </div>

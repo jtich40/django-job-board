@@ -1,31 +1,23 @@
 {% extends "base/main.html" %}
 
 {% block content %}
-
-<a href="{% url 'update-job' job.id %}" class="btn btn-primary">Update Listing</a>
-<a href="{% url 'delete-job' job.id %}" class="btn btn-primary">Delete Listing</a>
-
-{% comment %} <button class="btn" onclick="my_modal_1.showModal()">Delete Listing</button>
-<dialog id="my_modal_1" class="modal">
-  <div class="modal-box">
-    <h3 class="font-bold text-lg">Hello!</h3>
-    <p class="py-4">Are you sure? </p>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button in form, it will close the modal -->
-        <button class="btn"><a href="url">Delete</a></button>
-        <button class="btn">Close</button>
-      </form>
+<div class="grid grid-cols-3 gap-4 mx-10 my-10">
+    <div class="col-span-2">
+        <div class="border-b-2">
+            <h1 class="text-xl font-bold">{{ job.title }}</h1>
+        </div>
+        <h3 class="text-md mt-6"><span class="font-bold">Company:</span> {{ job.company }}</h3>
+        <h3 class="text-md"><span class="font-bold">Location:</span> {{ job.location }}</h3>
+        <p class="text-xs mt-6">{{ job.description }}</p>
+        <h4 class="text-md mt-6"><span class="font-bold">Deadline to Apply:</span> {{ job.deadline }} </h4>
+        <div class="mt-6">
+            {% if request.user == job.creator %}
+            <a href="{% url 'update-job' job.id %}" class="btn btn-primary">Update Listing</a>
+            <a href="{% url 'delete-job' job.id %}" class="btn btn-primary ml-6">Delete Listing</a>
+            {% else %}
+            <a href="{% url "apply-job" job.id %}" class="btn btn-primary">Apply</a>
+            {% endif %}
+        </div>
     </div>
-  </div>
-</dialog> {% endcomment %}
-
-<div>
-    <h1>{{job.title}}</h1>
-    <h3 class="text-lg">{{job.company}} - {{job.location}}</h3>
-    <p class="text-sm">{{job.description}}</p>
-    <h4 class="text-md">Deadline to Apply: {{job.deadline}} </h4>
-    <a href="{% url "apply-job" job.id %}" class="btn btn-primary">Apply</a>
 </div>
-
 {% endblock content %}

@@ -1,18 +1,17 @@
 {% extends "base/main.html" %}
 
 {% block content %}
-<h1>Welcome to JobQuest! Find your next job here!</h1>
 {% if request.user.is_authenticated %}
-<h2>Hi {{request.user.first_name}}!</h2>
+<h2 class="ml-8">Hi {{request.user.first_name}}!</h2>
 {% endif %}
-<div>
+<div class="mx-10 my-10">
     <div>
         {% for job in jobs  %}
         
-        <div>
-           <a href="{% url 'job' job.id %}">{{job.title}}</a>
-            <h3 class="text-lg">{{job.company}} - {{job.location}}</h3>
-            <p class="text-sm">{{job.description}}</p>
+        <div class="mt-8 border-gray-100 border-8 p-8 shadow-xl">
+           <a href="{% url 'job' job.id %}" class="text-xl text-purple-800 hover:underline">{{job.title}}</a>
+            <h3 class="text-md">{{job.company}} - {{job.location}}</h3>
+            <p class="text-xs mt-2">{{job.description}}</p>
         </div>
         
         {% endfor %}
