@@ -40,7 +40,6 @@
             <span class="label-text">Location</span>
         </label>
         {{form.location}}
-        {% comment %} <input type="text" placeholder="job location" class="input input-bordered" required /> {% endcomment %}
     </div>
     
     <div class="form-control">
@@ -48,18 +47,7 @@
             <span class="label-text">Deadline</span>
         </label>
         {{form.deadline}}
-        {% comment %} <input type="text" placeholder="job title" class="input input-bordered" required /> {% endcomment %}
     </div>
-
-    {% comment %} <div class="form-control">
-      <label class="label">
-        <span class="label-text">Password</span>
-      </label>
-      <input type="password" placeholder="password" class="input input-bordered" required />
-      <label class="label">
-        <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-      </label>
-    </div> {% endcomment %}
 
     <div class="flex justify-center mt-6">
       <a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary">Cancel</a>
