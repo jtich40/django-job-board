@@ -59,13 +59,21 @@ envname\Scripts\activate
 pip install -r requirements.txt
 ```
 
-6. Run the migrations:
+6. Install the tailwind dependencies and start the development server:
+
+```
+python manage.py tailwind install
+python manage.py tailwind start
+
+```
+
+7. Run the migrations:
 
 ```
 python manage.py migrate
 ```
 
-7. Start the development server:
+8. Start the development server:
 
 ```
 # start the server
