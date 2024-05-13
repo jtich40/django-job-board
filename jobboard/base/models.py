@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
 
 # Create your models here.
 class Job(models.Model):
@@ -13,6 +12,10 @@ class Job(models.Model):
     deadline = models.DateField(editable=True, null=True)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        # this will change the order of the jobs to show the most recent first
+        ordering = ['-updated', '-created']
     
     def __str__(self):
         return self.title
