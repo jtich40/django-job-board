@@ -3,7 +3,7 @@ from .models import Job
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .forms import JobForm, RegisterForm, LoginForm
+from .forms import JobForm, RegisterForm, ApplicationForm
 
 # Create your views here.
 
@@ -102,3 +102,25 @@ def deleteJob(request, pk):
         return redirect('home')
     
     return render(request, 'base/delete_job.html', {'job': job})
+
+def applyJob(request, pk):
+    # we need to get the job so we can send the email to the contact email
+    job = Job.objects.get(id=pk)
+    form = ApplicationForm()
+    
+    if request.method == 'POST':
+        # we are passing the data including the files to the form
+        form = ApplicationForm(request.POST, request.FILES)
+        if form.is_valid():
+            # create the job application but don't save yet
+           application = form.save(commit=False)
+           application.job = job
+           application.save()
+            
+        return redirect('success')
+    
+    return render(request, 'base/application_form.html', {'form': form})
+
+def success(request):
+    return render(request, 'base/success.html')
+        

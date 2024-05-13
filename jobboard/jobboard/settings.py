@@ -133,7 +133,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/files/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+# this is the location where the job application files will be uploaded
+MEDIA_ROOT = BASE_DIR / 'static/files'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field

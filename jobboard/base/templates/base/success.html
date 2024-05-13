@@ -1,0 +1,10 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+    
+<div class="flex justify-center">
+    <h1>You have successfully applied to this job! Click here to check out more jobs.</h1>
+    <a href="{% url 'home' %}" class="btn btn-primary">Back to Jobs</a>
+</div>
+
+{% endblock content %}
