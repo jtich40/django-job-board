@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Job
+from .models import Job, Application
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from .forms import JobForm, RegisterForm, ApplicationForm
 
 # Create your views here.
@@ -67,6 +68,7 @@ def job(request, pk):
     
     return render(request, 'base/job.html', {'job': job})
 
+@login_required(login_url='login')
 def createJob(request):
     form = JobForm()
     if request.method == 'POST':
@@ -117,6 +119,7 @@ def applyJob(request, pk):
         if form.is_valid():
             # create the job application but don't save yet
            application = form.save(commit=False)
+        #    set the job of the application to the job that the user is applying for
            application.job = job
            application.save()
             
@@ -126,4 +129,13 @@ def applyJob(request, pk):
 
 def success(request):
     return render(request, 'base/success.html')
-        
+       
+def applicantPage(request, pk):
+    # find the job by the job id
+    job = Job.objects.get(id=pk)
+    # find all the applications for the job by filtering the applications by the job
+    applications = Application.objects.filter(job=job)
+    
+    context = {'job': job, 'applications': applications}
+    return render(request, 'base/applicants.html', context)
+ 

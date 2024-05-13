@@ -14,6 +14,7 @@
             {% if request.user == job.creator %}
             <a href="{% url 'update-job' job.id %}" class="btn btn-primary">Update Listing</a>
             <a href="{% url 'delete-job' job.id %}" class="btn btn-primary ml-6">Delete Listing</a>
+            <a href="{% url 'applicants' job.id %}" class="btn btn-primary ml-6">View Applicants</a>
             {% else %}
             <a href="{% url "apply-job" job.id %}" class="btn btn-primary">Apply</a>
             {% endif %}

@@ -1,0 +1,51 @@
+{% extends "base/main.html" %}
+
+{% block content %}
+
+<a href="{{request.META.HTTP_REFERER}}" class="btn btn-primary ml-4">Back to Listing</a>
+<h1 class="text-3xl font-bold text-center">Applicants</h1>
+
+
+<div class="flex justify-center mt-8">
+            <ul>
+                {% for application in applications %}
+                <div class="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mb-6">
+                    <div class="card-body">
+                        <div class="flex justify-center">
+                            <li><span class="font-bold">Name:</span> {{application.first_name}} {{application.last_name}}</li>
+                        </div>
+                        <div class="flex justify-center mt-4">
+                            <li><span class="font-bold">Email:</span> {{application.email}}</li>
+                        </div>
+                        <div class="flex justify-center mt-4">
+                            <li>
+                                <a 
+                                href="{{application.resume.url}}" 
+                                target="blank" 
+                                class="btn btn-primary"
+                                >
+                                Download Resume
+                            </a>
+                            </li>
+                        </div>
+                        <div class="flex justify-center mt-4">
+                            <li>
+                                <a 
+                                href="{{application.cover_letter.url}}" 
+                                target="blank" 
+                                class="btn btn-primary"
+                                >
+                                Download Cover Letter
+                            </a>
+                            </li>
+                        </div>
+                    </div>
+                </div>
+
+
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    
+{% endblock content %}
